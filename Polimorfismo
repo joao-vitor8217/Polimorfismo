@@ -1,0 +1,239 @@
+public class PJ extends Pessoa {
+	   protected String CNPJ;
+	   protected String IE;
+	   
+	   public PJ() {
+	   super();
+	   CNPJ = "";
+	   IE = "";
+	  } 
+	   
+	   @Override
+	    public String toString() {
+	        return super.toString() + "CNPJ: " + CNPJ + "\nInscrição Estadual: " + IE + "\n";
+	    }
+	  
+	  public PJ(String nome, String telefone, String endereco, String
+	  CNPJ,
+	  String IE) {
+	  super (nome, telefone, endereco);
+	  this.CNPJ = CNPJ;
+	  this.IE = IE;
+	   }
+	public String getCNPJ() {
+		return CNPJ;
+	}
+	public void setCNPJ(String cNPJ) {
+		CNPJ = cNPJ;
+	}
+	public String getIE() {
+		return IE;
+	}
+	public void setIE(String iE) {
+		IE = iE;
+	}
+	  
+	}
+
+public class PF extends Pessoa {
+	
+	   protected String RG;
+	   protected String CPF;
+	   
+	   public PF() {
+	   super();
+	   RG = "";
+	   CPF = "";
+	}  
+	   
+	 
+	  public PF(String nome, String telefone, String endereco, String
+	    RG, String CPF) {
+	    super (nome, telefone, endereco);
+	    this.RG = RG;
+	    this.CPF = CPF;
+	    }
+
+	public String getRG() {
+		return RG;
+	}
+
+	public void setRG(String rG) {
+		RG = rG;
+	}
+
+	public String getCPF() {
+		return CPF;
+	}
+
+	public void setCPF(String cPF) {
+		CPF = cPF;
+	}
+
+	@Override
+    public String toString() {
+        return super.toString() + "RG: " + RG + "\nCPF: " + CPF + "\n";
+
+	
+	  }
+	  
+	}
+
+public abstract class Pessoa {
+	 protected String nome;
+	 protected String telefone;
+	 protected String endereco;
+	 
+	    public String toString() {
+	        return "Nome: " + nome + "\nTelefone: " + telefone + "\nEndereço: " + endereco + "\n";
+	    }
+	 	 
+	 
+	 public Pessoa() {
+		  nome = "";
+		  telefone = "";
+		  endereco = "";
+		  
+		 }
+
+		public Pessoa(String nome, String telefone, String endereco) {
+		  this.nome = nome;
+		  this.telefone = telefone;
+		  this.endereco = endereco;
+		  }
+
+		public String getNome() {
+			return nome;
+		}
+
+		public void setNome(String nome) {
+			this.nome = nome;
+		}
+
+		public String getTelefone() {
+			return telefone;
+		}
+
+		public void setTelefone(String telefone) {
+			this.telefone = telefone;
+		}
+
+		public String getEndereco() {
+			return endereco;
+		}
+
+		public void setEndereco(String endereco) {
+			this.endereco = endereco;
+		
+        }
+
+}
+
+package Polimorfismo;
+
+public class Parente extends PF {
+	protected String email;
+	  public Parente() {
+	  super();
+	  email = "";
+	}
+	  
+	  @Override
+	    public String toString() {
+	        return super.toString() + "Email: " + email + "\n";
+	    } 
+	  
+   
+ 
+	  
+	public Parente(String nome, String telefone, String endereco,
+	  String RG, String CPF, String email) {
+	  super(nome, telefone, endereco, RG, CPF);
+	  this.email = email;
+	  }
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	}
+
+public class Amigo extends PF {
+	protected String blog;
+	  public Amigo() {
+	  super();
+	  blog = "";
+	  
+	}
+	  @Override
+	    public String toString() {
+	        return super.toString() + "Blog: " + blog + "\n";
+	    }
+	  
+	  
+	 public Amigo(String nome, String telefone, String endereco, String RG, String CPF, String blog) {
+		 super(nome, telefone, endereco, CPF, RG);
+		 this.blog = blog;
+	  
+	  }
+
+	public String getBlog() {
+		return blog;
+	}
+
+	public void setBlog(String blog) {
+		this.blog = blog;
+	}
+	 
+	 
+	}
+
+import javax.swing.JOptionPane;
+
+public class CadastrarPessoa {
+public static void main(String[] args) {
+			
+		int opcao = Integer.parseInt(JOptionPane.showInputDialog("Digite a opção:\n\n1. Pessoa física\n2. Pessoa Jurídica"));
+		
+		String nome = JOptionPane.showInputDialog("Digite o nome");
+		String telefone = JOptionPane.showInputDialog("Digite o telefone");
+		String endereco = JOptionPane.showInputDialog("Digite o endereço");
+		
+		if (opcao == 1) {
+			PF objPF = new PF();
+			String RG = JOptionPane.showInputDialog("Digite o RG");
+			String CPF = JOptionPane.showInputDialog("Digite  o CPF");
+		
+				
+		opcao = Integer.parseInt(JOptionPane.showInputDialog("Digite a opção:\n\n1. Amigos\n2. Parentes"));
+				if (opcao == 1) {
+				String blog = JOptionPane.showInputDialog("Digite o blog");
+				
+				Amigo objAmigo = new Amigo(nome,telefone,endereco,RG,CPF,blog);
+				JOptionPane.showMessageDialog(null, objAmigo.toString());
+		
+				}
+				if (opcao == 2) {
+					String email = JOptionPane.showInputDialog("Digite o e-mail");
+					Parente objParente = new
+					Parente(nome,telefone,endereco,RG,CPF,email);
+					JOptionPane.showMessageDialog(null, objParente.toString());
+				
+				}
+		}
+		else if (opcao == 2) {
+			String CNPJ = JOptionPane.showInputDialog("Digite o CNPJ");
+			String IE = JOptionPane.showInputDialog("Digite a Inscrição Estadual");
+			PJ objPJ = new PJ(nome,telefone,endereco,CNPJ,IE);
+			JOptionPane.showMessageDialog(null, objPJ.toString());
+					
+			
+			}
+	}
+
+}
